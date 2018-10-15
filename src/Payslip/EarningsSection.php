@@ -2,6 +2,8 @@
 
 namespace App\Payslip;
 
+use App\Core\CurrencyFormatter;
+
 final class EarningsSection implements SectionInterface
 {
     /** @var EarningsItem[] */
@@ -35,8 +37,8 @@ final class EarningsSection implements SectionInterface
             return [
                 \ucfirst($item->getShiftType()),
                 $item->getHours(),
-                number_format($item->getRate(), 2),
-                number_format($item->getTotal(), 2),
+                CurrencyFormatter::format($item->getRate()),
+                CurrencyFormatter::format($item->getTotal()),
             ];
         }, $this->items);
     }

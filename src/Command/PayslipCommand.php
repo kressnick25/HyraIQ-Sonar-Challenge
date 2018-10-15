@@ -54,23 +54,7 @@ final class PayslipCommand extends Command
         $config              = $this->configLoader->load($input->getArgument('settings'));
         $timesheetCollection = $this->timesheetLoader->load($input->getArgument('timesheet'));
 
-//        $payslip = $this->generator->generate($config, ...$timesheetCollection);
-        $payslip = new Payslip();
-        $earningsSection = new EarningsSection();
-        foreach ($timesheetCollection as $shift) {
-            $item = new EarningsItem($shift->getType(), $shift->getHours(), $config->getBaseRate());
-            $earningsSection->addItem($item);
-        }
-        $payslip->addSection($earningsSection);
-
-        $taxSection = new TaxSection($earningsSection->getTotal());
-        $taxSection->addItem(new TaxItem('PAYG Tax', 0.11));
-        $taxSection->addItem(new TaxItem('HELP', 0.09));
-        $payslip->addSection($taxSection);
-
-        $superSection = new SuperannuationSection($earningsSection->getTotal());
-        $superSection->addItem(new SuperannuationItem('HostPlus', 0.095));
-        $payslip->addSection($superSection);
+        $payslip = $this->generator->generate($config, ...$timesheetCollection);
 
         $writer = new PayslipWriter($io);
         $writer->write($payslip);
