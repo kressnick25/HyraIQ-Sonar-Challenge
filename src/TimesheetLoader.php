@@ -7,7 +7,7 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Yaml\Yaml;
 
-class TimesheetLoader
+final class TimesheetLoader
 {
     /** @var DenormalizerInterface */
     private $denormalizer;

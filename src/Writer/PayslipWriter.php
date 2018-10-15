@@ -2,11 +2,12 @@
 
 namespace App\Writer;
 
+use App\Payslip\Payslip;
 use App\Payslip\SectionInterface;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-final class SectionWriter
+class PayslipWriter
 {
     /** @var SymfonyStyle */
     private $io;
@@ -16,7 +17,16 @@ final class SectionWriter
         $this->io = $io;
     }
 
-    public function writeSection(SectionInterface $section): void
+    public function write(Payslip $payslip): void
+    {
+        $this->io->title('Generated Payslip');
+
+        foreach ($payslip->getSections() as $section) {
+            $this->writeSection($section);
+        }
+    }
+
+    private function writeSection(SectionInterface $section): void
     {
         $this->io->section($section->getTitle());
         $headers = $section->getHeadings();

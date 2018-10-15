@@ -2,10 +2,10 @@
 
 namespace App\Payslip;
 
-class EarningsSection implements SectionInterface
+final class EarningsSection implements SectionInterface
 {
     /** @var EarningsItem[] */
-    private $items;
+    private $items = [];
 
     public function getTitle(): string
     {

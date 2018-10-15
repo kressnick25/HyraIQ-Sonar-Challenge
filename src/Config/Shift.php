@@ -2,7 +2,7 @@
 
 namespace App\Config;
 
-class Shift
+final class Shift
 {
     /** @var string */
     private $type;

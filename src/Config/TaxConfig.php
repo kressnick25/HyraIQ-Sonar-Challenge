@@ -2,7 +2,7 @@
 
 namespace App\Config;
 
-class TaxConfig
+final class TaxConfig
 {
     /** @var float */
     private $rate;

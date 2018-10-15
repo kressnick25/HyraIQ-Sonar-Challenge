@@ -2,7 +2,7 @@
 
 namespace App\Payslip;
 
-final class EarningsItem implements ItemInterface
+final class EarningsItem
 {
     /** @var string */
     private $shiftType;

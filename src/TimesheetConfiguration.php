@@ -5,7 +5,7 @@ namespace App;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-class TimesheetConfiguration implements ConfigurationInterface
+final class TimesheetConfiguration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {

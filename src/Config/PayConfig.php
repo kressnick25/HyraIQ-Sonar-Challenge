@@ -2,7 +2,7 @@
 
 namespace App\Config;
 
-class PayConfig
+final class PayConfig
 {
     /** @var float */
     private $baseRate;

@@ -7,7 +7,7 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Yaml\Yaml;
 
-class ConfigLoader
+final class ConfigLoader
 {
     /** @var DenormalizerInterface */
     private $denormalizer;
@@ -24,6 +24,9 @@ class ConfigLoader
 
         $config = $processor->processConfiguration(new PayConfiguration(), $configArray);
 
-        return $this->denormalizer->denormalize($config, PayConfig::class);
+        /** @var PayConfig $payConfig */
+        $payConfig = $this->denormalizer->denormalize($config, PayConfig::class);
+
+        return $payConfig;
     }
 }
