@@ -8,7 +8,7 @@ use App\Payslip\TaxItem;
 use App\Payslip\TaxSection;
 use PHPUnit\Framework\TestCase;
 
-class TaxSectionTest extends TestCase
+final class TaxSectionTest extends TestCase
 {
     /** @var TaxSection */
     private $section;

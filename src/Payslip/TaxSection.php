@@ -57,12 +57,15 @@ final class TaxSection implements SectionInterface
 
     public function getTotal(): float
     {
-        return \array_reduce(
+        /** @var float $total */
+        $total = \array_reduce(
             $this->items,
-            function (int $carry, TaxItem $item): int {
+            function (float $carry, TaxItem $item): float {
                 return $carry + $item->getRate() * $this->grossPay;
             },
             0
         );
+
+        return $total;
     }
 }

@@ -11,7 +11,7 @@ use App\Config\TaxType;
 use App\Services\PayslipGenerator;
 use PHPUnit\Framework\TestCase;
 
-class PayslipGeneratorTest extends TestCase
+final class PayslipGeneratorTest extends TestCase
 {
     public function testEmptyPayslipGeneratedWhenNoShiftsGiven(): void
     {

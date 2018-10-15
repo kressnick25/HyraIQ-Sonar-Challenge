@@ -8,7 +8,7 @@ use App\Payslip\EarningsItem;
 use App\Payslip\EarningsSection;
 use PHPUnit\Framework\TestCase;
 
-class EarningsSectionTest extends TestCase
+final class EarningsSectionTest extends TestCase
 {
     /** @var EarningsSection */
     private $section;

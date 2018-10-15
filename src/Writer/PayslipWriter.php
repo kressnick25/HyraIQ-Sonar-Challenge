@@ -10,7 +10,7 @@ use App\Util\CurrencyFormatter;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class PayslipWriter
+final class PayslipWriter
 {
     /** @var SymfonyStyle */
     private $io;

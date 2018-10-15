@@ -54,12 +54,15 @@ final class SuperannuationSection implements SectionInterface
 
     public function getTotal(): float
     {
-        return \array_reduce(
+        /** @var float $total */
+        $total = \array_reduce(
             $this->items,
-            function (int $carry, SuperannuationItem $item): int {
+            function (float $carry, SuperannuationItem $item): float {
                 return $carry + $item->getPercentage() * $this->grossPay;
             },
             0
         );
+
+        return $total;
     }
 }

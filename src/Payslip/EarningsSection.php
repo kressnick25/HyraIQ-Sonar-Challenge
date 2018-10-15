@@ -47,12 +47,15 @@ final class EarningsSection implements SectionInterface
 
     public function getTotal(): float
     {
-        return \array_reduce(
+        /** @var float $total */
+        $total = \array_reduce(
             $this->items,
-            function (int $carry, EarningsItem $item): int {
+            function (float $carry, EarningsItem $item): float {
                 return $carry + $item->getTotal();
             },
             0
         );
+
+        return $total;
     }
 }

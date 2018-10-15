@@ -8,7 +8,7 @@ use App\Payslip\SuperannuationItem;
 use App\Payslip\SuperannuationSection;
 use PHPUnit\Framework\TestCase;
 
-class SuperannuationSectionTest extends TestCase
+final class SuperannuationSectionTest extends TestCase
 {
     /** @var SuperannuationSection */
     private $section;
