@@ -13,7 +13,7 @@ final class PayConfig
     /** @var float */
     private $overtimeMultiplier;
 
-    /** @var array */
+    /** @var ShiftType[] */
     private $shiftTypes;
 
     /** @var array */

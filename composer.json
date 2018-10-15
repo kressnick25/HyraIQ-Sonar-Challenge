@@ -8,6 +8,7 @@
         "symfony/console": "*",
         "symfony/flex": "^1.1",
         "symfony/framework-bundle": "*",
+        "symfony/phpunit-bridge": "*",
         "symfony/property-access": "*",
         "symfony/serializer": "*",
         "symfony/yaml": "*"

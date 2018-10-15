@@ -2,7 +2,7 @@
 
 namespace App\Writer;
 
-use App\Core\CurrencyFormatter;
+use App\Util\CurrencyFormatter;
 use App\Payslip\Payslip;
 use App\Payslip\SectionInterface;
 use Symfony\Component\Console\Helper\TableSeparator;

@@ -10,6 +10,6 @@ final class PayslipGenerator
 {
     public function generate(PayConfig $config, Shift ...$shifts): Payslip
     {
-        return new Payslip();
+        return new Payslip(0, 0);
     }
 }

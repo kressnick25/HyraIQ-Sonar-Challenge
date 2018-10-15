@@ -2,7 +2,8 @@
 
 namespace App\Payslip;
 
-use App\Core\CurrencyFormatter;
+use App\Util\CurrencyFormatter;
+use App\Util\PercentageFormatter;
 
 final class SuperannuationSection implements SectionInterface
 {
@@ -43,7 +44,7 @@ final class SuperannuationSection implements SectionInterface
         return \array_map(function (SuperannuationItem $item): array {
             return [
                 \ucfirst($item->getFund()),
-                CurrencyFormatter::format($item->getPercentage()),
+                PercentageFormatter::format($item->getPercentage()),
                 CurrencyFormatter::format($this->grossPay * $item->getPercentage()),
             ];
         }, $this->items);

@@ -2,7 +2,7 @@
 
 namespace App\Payslip;
 
-use App\Core\CurrencyFormatter;
+use App\Util\CurrencyFormatter;
 
 final class EarningsSection implements SectionInterface
 {

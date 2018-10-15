@@ -2,6 +2,9 @@
 
 namespace App\Payslip;
 
+use App\Util\CurrencyFormatter;
+use App\Util\PercentageFormatter;
+
 final class TaxSection implements SectionInterface
 {
     /** @var float */
@@ -41,9 +44,9 @@ final class TaxSection implements SectionInterface
         return \array_map(
             function (TaxItem $item): array {
                 return [
-                    $item->getTaxType(),
-                    $item->getRate(),
-                    $this->grossPay * $item->getRate(),
+                    \ucfirst($item->getTaxType()),
+                    PercentageFormatter::format($item->getRate()),
+                    CurrencyFormatter::format($this->grossPay * $item->getRate()),
                 ];
             },
             $this->items
