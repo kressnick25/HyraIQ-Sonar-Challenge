@@ -2,10 +2,6 @@
 
 dev:
 	php composer.phar install --profile
-	yarn install
-	yarn fonts
-	yarn pdfjs
-	yarn dev
 	php bin/console assets:install
 
 test:

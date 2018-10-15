@@ -18,7 +18,7 @@ final class PayConfig
     /** @var ShiftType[] */
     private $shiftTypes;
 
-    /** @var array */
+    /** @var TaxType[] */
     private $taxTypes;
 
     public function __construct(

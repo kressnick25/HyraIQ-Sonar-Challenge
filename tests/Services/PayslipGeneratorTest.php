@@ -42,10 +42,13 @@ final class PayslipGeneratorTest extends TestCase
             new TaxType('PAYG', 0.1),
         ];
 
-        $shift     = new Shift($shiftTypeName, 5);
+        $shifts     = [new Shift($shiftTypeName, 5)];
+        $superFunds = [new SuperFund('Great fund', 0.1)];
+        $timesheet = new EmployeeTimesheet($superFunds, $shifts);
+
         $payConfig = new PayConfig(10, 10, 2, $shiftTypes, $taxTypes);
 
-        $payslip = $generator->generate($payConfig, $shift);
+        $payslip = $generator->generate($payConfig, $timesheet);
 
         static::assertSame(50, $payslip->getGrossPay(), 'Gross pay should be base * hours');
         static::assertSame(5, $payslip->getDeductions(), 'Deductions should be tax * gross pay');
