@@ -26,6 +26,8 @@ class PayslipGeneratorTest extends TestCase
 
     public function testSingleShiftGeneratedCorrectly(): void
     {
+        $this->markTestIncomplete('The generator has not been implemented yet');
+
         $generator  = new PayslipGenerator();
         $shiftTypeName       = 'Ordinary';
         $shiftTypes = [
@@ -47,6 +49,8 @@ class PayslipGeneratorTest extends TestCase
 
     public function testSingleOvertimeShiftWithGeneratedCorrectly(): void
     {
+        $this->markTestIncomplete('The generator has not been implemented yet');
+
         $generator  = new PayslipGenerator();
         $shiftTypeName       = 'Ordinary';
         $shiftTypes = [
