@@ -1,5 +1,6 @@
 /.vagrant
 /.idea
+/build/
 
 ###> symfony/framework-bundle ###
 /.env
