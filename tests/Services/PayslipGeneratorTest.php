@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Tests\Services;
 
+use App\Config\EmployeeTimesheet;
 use App\Config\PayConfig;
 use App\Config\Shift;
 use App\Config\ShiftType;
+use App\Config\SuperFund;
 use App\Config\TaxType;
 use App\Services\PayslipGenerator;
 use PHPUnit\Framework\TestCase;
@@ -17,8 +19,9 @@ final class PayslipGeneratorTest extends TestCase
     {
         $generator = new PayslipGenerator();
         $payConfig = new PayConfig(10, 38, 1.5, [], []);
+        $timesheet = new EmployeeTimesheet([], []);
 
-        $payslip = $generator->generate($payConfig);
+        $payslip = $generator->generate($payConfig, $timesheet);
 
         static::assertSame(0.0, $payslip->getGrossPay(), 'Gross pay should be 0');
         static::assertSame(0.0, $payslip->getDeductions(), 'Deductions should be 0');
@@ -36,7 +39,7 @@ final class PayslipGeneratorTest extends TestCase
             new ShiftType($shiftTypeName, 1.0),
         ];
         $taxTypes = [
-            new TaxType(0.1),
+            new TaxType('PAYG', 0.1),
         ];
 
         $shift     = new Shift($shiftTypeName, 5);
@@ -59,13 +62,16 @@ final class PayslipGeneratorTest extends TestCase
             new ShiftType($shiftTypeName, 1.0),
         ];
         $taxTypes = [
-            new TaxType(0.1),
+            new TaxType('PAYG', 0.1),
         ];
 
-        $shift     = new Shift($shiftTypeName, 5);
+        $shifts     = [new Shift($shiftTypeName, 5)];
+        $superFunds = [new SuperFund('Great fund', 0.1)];
+        $timesheet = new EmployeeTimesheet($superFunds, $shifts);
+
         $payConfig = new PayConfig(10, 0, 2, $shiftTypes, $taxTypes);
 
-        $payslip = $generator->generate($payConfig, $shift);
+        $payslip = $generator->generate($payConfig, $timesheet);
 
         static::assertSame(100, $payslip->getGrossPay(), 'Gross pay should be base * hours');
         static::assertSame(10, $payslip->getDeductions(), 'Deductions should be tax * gross pay');

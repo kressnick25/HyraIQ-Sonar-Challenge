@@ -1,5 +1,10 @@
-timesheet:
-    - type: ordinary
-      hours: 15
-    - type: weekend
-      hours: 8
+alice:
+    superannuation:
+        - fundName: Great super fund
+          percentage: 0.9
+
+    timesheet:
+        - type: ordinary
+          hours: 15
+        - type: weekend
+          hours: 8

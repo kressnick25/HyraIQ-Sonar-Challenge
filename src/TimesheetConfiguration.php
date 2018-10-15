@@ -13,13 +13,24 @@ final class TimesheetConfiguration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
 
-        $root = $treeBuilder->root('timesheets');
+        $root = $treeBuilder->root('employee');
 
         $root
-            ->arrayPrototype()
-                ->children()
-                    ->scalarNode('type')->end()
-                    ->floatNode('hours')->end()
+            ->children()
+            ->arrayNode('superannuation')
+                ->arrayPrototype()
+                    ->children()
+                        ->scalarNode('fundName')->end()
+                        ->floatNode('percentage')->end()
+                    ->end()
+                ->end()
+            ->end()
+            ->arrayNode('timesheet')
+                ->arrayPrototype()
+                    ->children()
+                        ->scalarNode('type')->end()
+                        ->floatNode('hours')->end()
+                    ->end()
                 ->end()
             ->end()
         ;

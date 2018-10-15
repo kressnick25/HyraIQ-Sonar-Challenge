@@ -47,9 +47,9 @@ final class PayslipCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         $config              = $this->configLoader->load($input->getArgument('settings'));
-        $timesheetCollection = $this->timesheetLoader->load($input->getArgument('timesheet'));
+        $employeeTimesheet = $this->timesheetLoader->load($input->getArgument('timesheet'));
 
-        $payslip = $this->generator->generate($config, ...$timesheetCollection);
+        $payslip = $this->generator->generate($config, $employeeTimesheet);
 
         $writer = new PayslipWriter($io);
         $writer->write($payslip);
