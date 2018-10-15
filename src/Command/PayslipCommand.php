@@ -3,7 +3,10 @@
 namespace App\Command;
 
 use App\ConfigLoader;
+use App\Payslip\EarningsItem;
+use App\Payslip\EarningsSection;
 use App\TimesheetLoader;
+use App\Writer\SectionWriter;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -40,5 +43,14 @@ final class PayslipCommand extends Command
 
         $config              = $this->configLoader->load($input->getArgument('settings'));
         $timesheetCollection = $this->timesheetLoader->load($input->getArgument('timesheet'));
+
+        $earningsSection = new EarningsSection();
+        foreach ($timesheetCollection as $shift) {
+            $item = new EarningsItem($shift->getType(), $shift->getHours(), $config->getBaseRate());
+            $earningsSection->addItem($item);
+        }
+
+        $writer = new SectionWriter($io);
+        $writer->writeSection($earningsSection);
     }
 }
