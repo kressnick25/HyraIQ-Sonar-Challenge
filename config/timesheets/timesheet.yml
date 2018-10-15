@@ -1,0 +1,5 @@
+timesheet:
+    - type: ordinary
+      hours: 15
+    - type: weekend
+      hours: 8

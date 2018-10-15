@@ -1,0 +1,14 @@
+settings:
+    baseRate: 22.50
+    regularHours: 38
+    overtimeMultiplier: 1.5
+    shiftTypes:
+        ordinary: 1.0
+        weekend: 1.5
+        publicHoliday: 2.0
+    taxTypes:
+        payg:
+            rate: 0.11
+        hecs:
+            rate: 0.9
+            threshold: 1000
