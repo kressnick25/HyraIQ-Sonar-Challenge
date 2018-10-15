@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Services;
 
 use App\Config\PayConfig;
@@ -26,18 +28,18 @@ class PayslipGeneratorTest extends TestCase
 
     public function testSingleShiftGeneratedCorrectly(): void
     {
-        $this->markTestIncomplete('The generator has not been implemented yet');
+        static::markTestIncomplete('The generator has not been implemented yet');
 
-        $generator  = new PayslipGenerator();
-        $shiftTypeName       = 'Ordinary';
-        $shiftTypes = [
+        $generator     = new PayslipGenerator();
+        $shiftTypeName = 'Ordinary';
+        $shiftTypes    = [
             new ShiftType($shiftTypeName, 1.0),
         ];
-        $taxTypes   = [
+        $taxTypes = [
             new TaxType(0.1),
         ];
 
-        $shift = new Shift($shiftTypeName, 5);
+        $shift     = new Shift($shiftTypeName, 5);
         $payConfig = new PayConfig(10, 10, 2, $shiftTypes, $taxTypes);
 
         $payslip = $generator->generate($payConfig, $shift);
@@ -49,18 +51,18 @@ class PayslipGeneratorTest extends TestCase
 
     public function testSingleOvertimeShiftWithGeneratedCorrectly(): void
     {
-        $this->markTestIncomplete('The generator has not been implemented yet');
+        static::markTestIncomplete('The generator has not been implemented yet');
 
-        $generator  = new PayslipGenerator();
-        $shiftTypeName       = 'Ordinary';
-        $shiftTypes = [
+        $generator     = new PayslipGenerator();
+        $shiftTypeName = 'Ordinary';
+        $shiftTypes    = [
             new ShiftType($shiftTypeName, 1.0),
         ];
-        $taxTypes   = [
+        $taxTypes = [
             new TaxType(0.1),
         ];
 
-        $shift = new Shift($shiftTypeName, 5);
+        $shift     = new Shift($shiftTypeName, 5);
         $payConfig = new PayConfig(10, 0, 2, $shiftTypes, $taxTypes);
 
         $payslip = $generator->generate($payConfig, $shift);

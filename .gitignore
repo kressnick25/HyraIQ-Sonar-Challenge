@@ -1,6 +1,7 @@
 /.vagrant
 /.idea
 /build/
+.php_cs.cache
 
 ###> symfony/framework-bundle ###
 /.env

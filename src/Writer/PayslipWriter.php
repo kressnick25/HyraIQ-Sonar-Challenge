@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Writer;
 
-use App\Util\CurrencyFormatter;
 use App\Payslip\Payslip;
 use App\Payslip\SectionInterface;
+use App\Util\CurrencyFormatter;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -60,7 +62,7 @@ class PayslipWriter
                 ],
                 [
                     'Net Pay',
-                    CurrencyFormatter::format($payslip->getGrossPay() - $payslip->getDeductions())
+                    CurrencyFormatter::format($payslip->getGrossPay() - $payslip->getDeductions()),
                 ],
             ]
         );

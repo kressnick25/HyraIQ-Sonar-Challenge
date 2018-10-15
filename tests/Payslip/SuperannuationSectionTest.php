@@ -1,9 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Payslip;
 
-use App\Payslip\EarningsItem;
-use App\Payslip\EarningsSection;
 use App\Payslip\SuperannuationItem;
 use App\Payslip\SuperannuationSection;
 use PHPUnit\Framework\TestCase;
@@ -13,10 +13,10 @@ class SuperannuationSectionTest extends TestCase
     /** @var SuperannuationSection */
     private $section;
 
-    public function setUp()
+    protected function setUp(): void
     {
-        $item1 = new SuperannuationItem('Great Fund', 0.01);
-        $item2 = new SuperannuationItem('lousy fund', 0.1);
+        $item1         = new SuperannuationItem('Great Fund', 0.01);
+        $item2         = new SuperannuationItem('lousy fund', 0.1);
         $this->section = (new SuperannuationSection(100))
             ->addItem($item1)
             ->addItem($item2)

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Config;
 
 final class ShiftType
@@ -11,7 +13,7 @@ final class ShiftType
 
     public function __construct(string $name, $multiplier)
     {
-        $this->name = $name;
+        $this->name       = $name;
         $this->multiplier = $multiplier;
     }
 

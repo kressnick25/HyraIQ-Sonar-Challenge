@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -21,7 +23,6 @@ final class TimesheetConfiguration implements ConfigurationInterface
                 ->end()
             ->end()
         ;
-
 
         return $treeBuilder;
     }

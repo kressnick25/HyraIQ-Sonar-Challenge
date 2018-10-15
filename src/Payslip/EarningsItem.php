@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Payslip;
 
 final class EarningsItem
@@ -16,8 +18,8 @@ final class EarningsItem
     public function __construct(string $shiftType, float $hours, float $rate)
     {
         $this->shiftType = $shiftType;
-        $this->hours = $hours;
-        $this->rate = $rate;
+        $this->hours     = $hours;
+        $this->rate      = $rate;
     }
 
     public function getShiftType(): string

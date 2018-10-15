@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Payslip;
 
 use App\Payslip\EarningsItem;
@@ -19,9 +21,9 @@ final class EarningsItemTest extends TestCase
     public function getTests(): array
     {
         return [
-            'Zero hours returns zero' => [0, 1500, 0],
-            'Zero rate returns zero' => [2750, 0, 0],
-            'Round  numbers returns product' => [10, 2, 20],
+            'Zero hours returns zero'                       => [0, 1500, 0],
+            'Zero rate returns zero'                        => [2750, 0, 0],
+            'Round  numbers returns product'                => [10, 2, 20],
             'Floating point numbers returns floating point' => [7, 12.3356, 86.3492],
         ];
     }

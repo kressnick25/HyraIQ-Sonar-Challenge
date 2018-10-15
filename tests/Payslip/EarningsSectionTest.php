@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Payslip;
 
 use App\Payslip\EarningsItem;
@@ -11,10 +13,10 @@ class EarningsSectionTest extends TestCase
     /** @var EarningsSection */
     private $section;
 
-    public function setUp()
+    protected function setUp(): void
     {
-        $item1 = new EarningsItem('FakeShift', 1, 2);
-        $item2 = new EarningsItem('anotherFakeShift', 3, 2);
+        $item1         = new EarningsItem('FakeShift', 1, 2);
+        $item2         = new EarningsItem('anotherFakeShift', 3, 2);
         $this->section = (new EarningsSection())
             ->addItem($item1)
             ->addItem($item2)

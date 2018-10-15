@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Config;
 
 final class TaxType
@@ -12,7 +14,7 @@ final class TaxType
 
     public function __construct(float $rate, float $threshold = 0)
     {
-        $this->rate = $rate;
+        $this->rate      = $rate;
         $this->threshold = $threshold;
     }
 

@@ -1,15 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Command;
 
 use App\ConfigLoader;
-use App\Payslip\EarningsItem;
-use App\Payslip\EarningsSection;
-use App\Payslip\Payslip;
-use App\Payslip\SuperannuationItem;
-use App\Payslip\SuperannuationSection;
-use App\Payslip\TaxItem;
-use App\Payslip\TaxSection;
 use App\Services\PayslipGenerator;
 use App\TimesheetLoader;
 use App\Writer\PayslipWriter;
@@ -35,10 +30,10 @@ final class PayslipCommand extends Command
         parent::__construct();
         $this->timesheetLoader = $timesheetLoader;
         $this->configLoader    = $configLoader;
-        $this->generator = $generator;
+        $this->generator       = $generator;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('app:payslip')
             ->setDescription('Generates an employees payslip')
@@ -47,7 +42,7 @@ final class PayslipCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $io = new SymfonyStyle($input, $output);
 

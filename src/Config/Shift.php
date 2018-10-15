@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Config;
 
 final class Shift
@@ -12,7 +14,7 @@ final class Shift
 
     public function __construct(string $type, float $hours)
     {
-        $this->type = $type;
+        $this->type  = $type;
         $this->hours = $hours;
     }
 
