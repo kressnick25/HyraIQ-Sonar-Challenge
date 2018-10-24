@@ -1,7 +1,7 @@
 alice:
     superannuation:
         - fundName: Great super fund
-          percentage: 0.9
+          percentage: 0.09
 
     timesheet:
         - type: ordinary

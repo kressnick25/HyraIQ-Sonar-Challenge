@@ -10,5 +10,5 @@ settings:
         payg:
             rate: 0.11
         hecs:
-            rate: 0.9
+            rate: 0.09
             threshold: 1000

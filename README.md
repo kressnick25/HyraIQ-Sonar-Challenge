@@ -139,7 +139,7 @@ $ make test
 To run the application you will be running a Symfony command:
 
 ```bash
-./bin/conosle app:payslip config/resources/payConfig.yml config/resources/timesheet.yml
+./bin/console app:payslip config/resources/payConfig.yml config/resources/timesheet.yml
 ```
 
 This will execute the [PaySlipCommand](src/Command/PayslipCommand.php) passing in the payment configuration and an
