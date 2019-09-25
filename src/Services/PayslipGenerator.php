@@ -46,52 +46,47 @@ final class PayslipGenerator
         $overtime = false;
         $earnings = new EarningsSection();
         foreach ($timesheet->getShifts() as $shift){
-            // assert object type is Shift... see comment at end of file.
-            if (is_object($shift) && $shift instanceof Shift){
-                $shiftHours = $shift->getHours();
-                $overTimeHours = 0;
-                $shiftRate = $config->getBaseRate();
-                $shiftTypeName = $shift->getType();
+            $shiftHours = $shift->getHours();
+            $overTimeHours = 0;
+            $shiftRate = $config->getBaseRate();
+            $shiftTypeName = $shift->getType();
 
-                //Get pay rate from type;
-                $shiftRate *= $this->getRateMultiplyer($config, $shiftTypeName);
+            //Get pay rate from type;
+            $shiftRate *= $this->getRateMultiplier($config, $shiftTypeName);
 
-                // Check if overtime rate required
-                if ($overtime){ // whole shift overtime
-                    $shiftRate *= $config->getOvertimeMultiplier();
-                    $overTimeHours = $shiftHours; // all shift hours worked were in overtime
+            // Check if overtime rate required
+            if ($overtime){ // whole shift overtime
+                $shiftRate *= $config->getOvertimeMultiplier();
+                $overTimeHours = $shiftHours; // all shift hours worked were in overtime
+            }
+            else { // else add to overtime and check for half shift;
+                $totalHoursWorked += $shiftHours;
+                if ($totalHoursWorked > $config->getRegularHours()) {
+                    // shift put employee into overtime
+                    $overTimeHours = $totalHoursWorked - $config->getRegularHours();
+                    $overtime = true;
                 }
-                else { // else add to overtime and check for half shift;
-                    $totalHoursWorked += $shiftHours;
-                    if ($totalHoursWorked > $config->getRegularHours()) {
-                        // shift put employee into overtime
-                        $overTimeHours = $totalHoursWorked - $config->getRegularHours();
-                        $overtime = true;
-                    }
-                }
+            }
 
-                // Add EarningsItems to earnings section
-                if ($overTimeHours != 0) { // split to two EarningsItems for overtime pay
-                    $regPayHours = $shiftHours - $overTimeHours;
-                    $overTimeRate = $shiftRate * $config->getOvertimeMultiplier();
+            // Add EarningsItems to earnings section
+            if ($overTimeHours != 0) { // split to two EarningsItems for overtime pay
+                $regPayHours = $shiftHours - $overTimeHours;
+                $overTimeRate = $shiftRate * $config->getOvertimeMultiplier();
 
-                    $earnings->addItem( new EarningsItem($shiftTypeName, $regPayHours, $shiftRate) );
-                    $earnings->addItem( new EarningsItem($shiftTypeName." - OVERTIME", $overTimeHours, $overTimeRate));
-                }
-                else { // regular singular payslip
-                    $earnings->addItem( new EarningsItem( $shiftTypeName, $shiftHours, $shiftRate ));
-                }
+                $earnings->addItem( new EarningsItem($shiftTypeName, $regPayHours, $shiftRate) );
+                $earnings->addItem( new EarningsItem($shiftTypeName." - OVERTIME", $overTimeHours, $overTimeRate));
+            }
+            else { // regular singular payslip
+                $earnings->addItem( new EarningsItem( $shiftTypeName, $shiftHours, $shiftRate ));
             }
         }
         return $earnings;
     }
 
-    private function getRateMultiplyer(PayConfig $config, string $shiftTypeName){
+    private function getRateMultiplier(PayConfig $config, string $shiftTypeName){
         foreach ($config->getShiftTypes() as $type){
-            if (is_object($type) && $type instanceof ShiftType){
-                if ($shiftTypeName == $type->getName()){
-                    return $type->getMultiplier();
-                }
+            if ($shiftTypeName == $type->getName()){
+                return $type->getMultiplier();
             }
         }
         return null;
@@ -105,10 +100,8 @@ final class PayslipGenerator
     private function CalculateTax(PayConfig $config, float $grossPay){
         $taxSection = new TaxSection($grossPay);
         foreach($config->getTaxTypes() as $taxType){
-            if (is_object($taxType) && $taxType instanceof TaxType){
-                if ($grossPay > $taxType->getThreshold()){
-                    $taxSection->addItem( new TaxItem( $taxType->getName(), $taxType->getRate() ));
-                }
+            if ($grossPay > $taxType->getThreshold()){
+                $taxSection->addItem( new TaxItem( $taxType->getName(), $taxType->getRate() ));
             }
         }
 
@@ -123,20 +116,12 @@ final class PayslipGenerator
     private function CalculateSuper(EmployeeTimesheet $timesheet, float $grossPay ){
         $superSection = new SuperannuationSection($grossPay);
         foreach($timesheet->getSuperFunds() as $superFund){
-            if(is_object($superFund) && $superFund instanceof SuperFund){
-                $superSection->addItem(
-                    new SuperannuationItem(
-                        $superFund->getFundName(),
-                        $superFund->getPercentage() ));
-            }
+            $superSection->addItem(
+                new SuperannuationItem(
+                    $superFund->getFundName(),
+                    $superFund->getPercentage() ));
         }
 
         return $superSection;
     }
-    /*
-     * NOTE: As seen above, I keep asserting types for Objects in Arrays.
-     * In other OOP languages like Java or C#, would be able to cast these to objects
-     * to allow to call methods, but apparently no need to cast in PHP. However, still
-     * can't call methods without these assertions or else my IDE spits out errors :(
-     */
 }
