@@ -23,15 +23,15 @@ final class PayslipGeneratorTest extends TestCase
 
         $payslip = $generator->generate($payConfig, $timesheet);
 
-        static::assertSame(0.0, $payslip->getGrossPay(), 'Gross pay should be 0');
-        static::assertSame(0.0, $payslip->getDeductions(), 'Deductions should be 0');
-        static::assertSame(0.0, $payslip->getNetPay(), 'Net pay should be 0');
+        static::assertEquals(0.0, $payslip->getGrossPay(), 'Gross pay should be 0');
+        static::assertEquals(0.0, $payslip->getDeductions(), 'Deductions should be 0');
+        static::assertEquals(0.0, $payslip->getNetPay(), 'Net pay should be 0');
         static::assertSame([], $payslip->getSections(), 'Sections should be empty');
     }
 
     public function testSingleShiftGeneratedCorrectly(): void
     {
-        static::markTestIncomplete('The generator has not been implemented yet');
+        //static::markTestIncomplete('The generator has not been implemented yet');
 
         $generator     = new PayslipGenerator();
         $shiftTypeName = 'Ordinary';
@@ -50,14 +50,14 @@ final class PayslipGeneratorTest extends TestCase
 
         $payslip = $generator->generate($payConfig, $timesheet);
 
-        static::assertSame(50, $payslip->getGrossPay(), 'Gross pay should be base * hours');
-        static::assertSame(5, $payslip->getDeductions(), 'Deductions should be tax * gross pay');
-        static::assertSame(45, $payslip->getNetPay(), 'Net pay should be gross pay - deductions');
+        static::assertEquals(50, $payslip->getGrossPay(), 'Gross pay should be base * hours');
+        static::assertEquals(5, $payslip->getDeductions(), 'Deductions should be tax * gross pay');
+        static::assertEquals(45, $payslip->getNetPay(), 'Net pay should be gross pay - deductions');
     }
 
     public function testSingleOvertimeShiftWithGeneratedCorrectly(): void
     {
-        static::markTestIncomplete('The generator has not been implemented yet');
+        //static::markTestIncomplete('The generator has not been implemented yet');
 
         $generator     = new PayslipGenerator();
         $shiftTypeName = 'Ordinary';
@@ -76,8 +76,8 @@ final class PayslipGeneratorTest extends TestCase
 
         $payslip = $generator->generate($payConfig, $timesheet);
 
-        static::assertSame(100, $payslip->getGrossPay(), 'Gross pay should be base * hours');
-        static::assertSame(10, $payslip->getDeductions(), 'Deductions should be tax * gross pay');
-        static::assertSame(90, $payslip->getNetPay(), 'Net pay should be gross pay - deductions');
+        static::assertEquals(100, $payslip->getGrossPay(), 'Gross pay should be base * hours');
+        static::assertEquals(10, $payslip->getDeductions(), 'Deductions should be tax * gross pay');
+        static::assertEquals(90, $payslip->getNetPay(), 'Net pay should be gross pay - deductions');
     }
 }
